@@ -42,9 +42,14 @@ function buildColorTokens() {
   return t.StyleSheet([t.NewLine(), ...colorVariables, t.NewLine(), colorsMap]);
 }
 
+export function getGeneratedPath(module: string) {
+  const SRC_DIR = process.env.SRC_DIR || path.resolve(__dirname, "../");
+  return path.join(SRC_DIR, module, "scss", "generated");
+}
+
 async function build() {
   try {
-    const generatedDir = u.getGeneratedPath("colors");
+    const generatedDir = getGeneratedPath("colors");
     mkdirSync(generatedDir, { recursive: true });
     const filePath1 = path.resolve(generatedDir, "_colors.scss");
     const { code } = generate(buildColorTokens() as any);
