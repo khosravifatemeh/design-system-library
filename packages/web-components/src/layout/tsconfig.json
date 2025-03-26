@@ -1,0 +1,13 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "outDir": "dist",
+    "rootDir": ".",
+    "paths": {
+      "scss-builder": ["../scss-builder/dist"]
+    }
+  },
+  "references": [{ "path": "../scss-builder" }],
+  "include": ["**/*.ts"]
+}
