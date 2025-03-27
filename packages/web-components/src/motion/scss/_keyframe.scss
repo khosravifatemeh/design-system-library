@@ -1,0 +1,13 @@
+@mixin keyframes() {
+  @each $name, $stages in $keyframes {
+    @keyframes #{$name} {
+      @each $stage, $properties in $stages {
+        #{$stage} {
+          @each $prop, $value in $properties {
+            #{$prop}: #{$value};
+          }
+        }
+      }
+    }
+  }
+}
