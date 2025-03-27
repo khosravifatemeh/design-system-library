@@ -1,0 +1,15 @@
+@mixin properties($map) {
+  @each $name, $value in $map {
+    #{$name}: $value;
+  }
+}
+
+@mixin motion-style($map) {
+  @include properties(map.remove($map, placement));
+
+  @each $name, $value in $map {
+    &[data-placement^="#{$name}"] {
+      @include properties($value);
+    }
+  }
+}
