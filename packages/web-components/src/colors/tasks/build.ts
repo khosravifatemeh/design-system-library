@@ -1,41 +1,42 @@
 import { promises as fs, mkdirSync } from "fs";
 import * as path from "path";
-import { types as t, primitive, generate } from "scss-builder";
-import { colors } from "../colors";
+import { types as t, util as u, generate } from "@scss-builder";
+import { colors } from "@colors";
 
-function buildColorsFile() {
-  const colorVariables = Object.entries(colors).flatMap(
-    ([colorName, shades]) => {
-      return Object.entries(shades).map(([shade, value]) => {
-        return t.Assignment({
-          id: t.Identifier(`${colorName}-${shade}`, true),
-          init: primitive(value),
-          default: true,
-        });
+function getMap(prefix, values) {
+  if (typeof values !== "object") {
+    return u.primitive(`$${prefix}`);
+  }
+  return t.SassMap({
+    properties: Object.entries(values).map(([key, value]) => {
+      const name = u.joinKeys(prefix, key);
+      return t.SassMapProperty({
+        key: t.Identifier(key, true),
+        value: getMap(name, value),
       });
-    }
-  );
+    }),
+  });
+}
 
+function getVariables(prefix, values) {
+  return Object.entries(values).flatMap(([key, value]) => {
+    if (typeof value === "object") {
+      const name = u.joinKeys(prefix, key);
+      return getVariables(name, value);
+    }
+    return t.Assignment({
+      id: t.Identifier(u.joinKeys(prefix, key), true),
+      init: u.primitive(value),
+      default: true,
+    });
+  });
+}
+
+function buildColorTokens() {
+  const colorVariables = getVariables(null, colors);
   const colorsMap = t.Assignment({
     id: t.Identifier("colors"),
-    init: t.SassMap({
-      properties: Object.entries(colors).map(([colorName, shades]) =>
-        t.SassMapProperty({
-          key: t.Identifier(colorName, true),
-          value: t.SassMap({
-            properties: Object.entries(shades).map(([shade, _value]) =>
-              t.SassMapProperty({
-                key: t.Identifier(shade),
-                value: primitive(`$${colorName}-${shade}`),
-                quoted: true,
-              })
-            ),
-          }),
-          quoted: true,
-        })
-      ),
-    }),
-    default: true,
+    init: getMap(null, colors),
   });
 
   return t.StyleSheet([t.NewLine(), ...colorVariables, t.NewLine(), colorsMap]);
@@ -43,10 +44,10 @@ function buildColorsFile() {
 
 async function build() {
   try {
-    const generatedDir = path.resolve(__dirname, "../../scss/generated");
+    const generatedDir = u.getGeneratedPath("colors");
     mkdirSync(generatedDir, { recursive: true });
     const filePath1 = path.resolve(generatedDir, "_colors.scss");
-    const { code } = generate(buildColorsFile() as any);
+    const { code } = generate(buildColorTokens() as any);
     await fs.writeFile(filePath1, code);
     console.log("Colors SCSS has been generated successfully");
   } catch (error) {
