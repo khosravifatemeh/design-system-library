@@ -1,4 +1,13 @@
-import { NodeDefinitionOptions, NodeFields } from "../types";
+import { definitions } from "scss-builder/ast";
+import {
+  DefinitionMap,
+  Node,
+  NodeBuilder,
+  NodeDefinition,
+  NodeFactory,
+  NodeField,
+  Types,
+} from "scss-builder/types";
 
 function isArgsObject(args) {
   return (
@@ -9,7 +18,7 @@ function isArgsObject(args) {
   );
 }
 
-function builder(type: string, fields: NodeFields) {
+function builder<T>(type: string, fields: NodeField<T>): NodeFactory {
   const keys = Object.keys(fields);
   return (...args: unknown[]) => {
     let input: unknown[] | Record<string, unknown> = args;
@@ -36,10 +45,22 @@ function builder(type: string, fields: NodeFields) {
   };
 }
 
-export function defineNode(type: string, options: NodeDefinitionOptions) {
-  const { fields = {}, generate } = options;
+function defineNode<T extends Node>(
+  type: string,
+  options: NodeDefinition<T>
+): NodeBuilder<T> {
+  const { fields, generate } = options;
   if (typeof generate !== "function") {
     throw new Error(`Expected a \`generate\` method for type \`${type}\``);
   }
-  return { type, builder: builder(type, fields), generate };
+  return { type, builder: builder<T>(type, fields), generate };
 }
+
+const types: Types = (
+  Object.keys(definitions) as (keyof DefinitionMap)[]
+).reduce((acc, key) => {
+  acc[key] = definitions[key].builder;
+  return acc;
+}, {} as Types);
+
+export { defineNode, types };
