@@ -1,4 +1,4 @@
-import { rgba } from "./utils/rgb";
+import { rgba } from "@colors";
 
 export const black = "#09090B";
 export const black100 = black;
