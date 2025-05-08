@@ -1,5 +1,4 @@
-import { definitions } from ".";
-import { newLine } from "../generate/printer.util";
+import { newLine } from "../generate/printer";
 function validateDefined(node) {
   if (!node) {
     throw new Error("Node is not defined");
