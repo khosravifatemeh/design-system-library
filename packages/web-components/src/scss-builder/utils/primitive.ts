@@ -1,11 +1,12 @@
-import { convert, types as t } from "../";
+import * as u from "scss-builder/utils";
+import { types as t } from "scss-builder/ast";
 export function primitive(value: any) {
   if (typeof value === "string") {
     if (value.startsWith("#")) {
       return t.SassValue(value);
     }
     if (value.startsWith("$")) {
-      return t.SassValue(convert(value));
+      return t.SassValue(u.convertName(value));
     }
 
     if (
@@ -36,4 +37,8 @@ export function primitive(value: any) {
   }
 
   throw new Error(`Unknown type: ${typeof value}`);
+}
+
+export function joinKeys(k1, k2) {
+  return [k1, k2].join("-");
 }
