@@ -1,0 +1,50 @@
+{
+  "name": "blockchain-ui-library",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "yarn storybook",
+    "storybook": "storybook dev -p 6006",
+    "build:layout": "tsc -p src/layout/tsconfig.json",
+    "build:type": "tsc -p src/type/tsconfig.json",
+    "generate:scss": "node --require ./src/register-paths.js dist/src/colors/tasks/build.js",
+    "build:colors": "tsc --project tsconfig.json",
+    "build:themes": "tsc --project src/themes/tsconfig.json",
+    "build:effects": "tsc --project src/effects/tsconfig.json",
+    "build:motion": "tsc --project src/motion/tsconfig.json",
+    "build:scssBuilder": "tsc --project tsconfig.json"
+  },
+  "_moduleAliases": {
+    "layout": "./src/layout/dist"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@lit/context": "^1.1.1",
+    "lit": "^3.1.0"
+  },
+  "devDependencies": {
+    "@chromatic-com/storybook": "3",
+    "@mordech/vite-lit-loader": "^0.37.0",
+    "@prettier/sync": "^0.5.5",
+    "@storybook/addon-essentials": "^8.4.7",
+    "@storybook/addon-links": "^8.4.7",
+    "@storybook/addon-storysource": "^8.4.7",
+    "@storybook/blocks": "^8.4.7",
+    "@storybook/experimental-addon-test": "8.6.12",
+    "@storybook/test": "8.6.12",
+    "@storybook/web-components": "^8.4.7",
+    "@storybook/web-components-vite": "^8.4.7",
+    "change-case-all": "^2.1.0",
+    "fast-glob": "^3.3.3",
+    "module-alias": "^2.2.3",
+    "prettier": "^3.5.3",
+    "remark-gfm": "^4.0.1",
+    "storybook": "^8.4.7",
+    "storybook-addon-accessibility-checker": "^3.1.61-rc.3",
+    "typescript": "^5.8.3",
+    "vite": "^6.2.6"
+  }
+}
