@@ -1,3 +1,3 @@
-export * from "./ast";
+export { types } from "./ast";
 export * from "./generate";
-export * from "./utils";
+export * as util from "./utils";
