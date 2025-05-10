@@ -13,16 +13,12 @@ function formatNameToScss(name) {
   for (let i = 0; i < name.length; i++) {
     const char = name[i];
 
-    // Skip dashes
-    if (char === "-") {
-      continue;
-    }
-
     // If it's a number, add dash and the rest, then break
     if (
       numbers.indexOf(char) !== -1 &&
       i !== 0 &&
-      numbers.indexOf(name[i - 1]) === -1
+      numbers.indexOf(name[i - 1]) === -1 &&
+      name[i - 1] !== "-"
     ) {
       string += "-" + name.slice(i);
       break;
