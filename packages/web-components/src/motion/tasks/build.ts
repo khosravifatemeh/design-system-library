@@ -1,141 +1,119 @@
 import { mkdirSync } from "fs";
 import { writeFile } from "fs/promises";
 import path from "path";
-import {
-  convert,
-  formats,
-  generate,
-  primitive,
-  types as t,
-} from "scss-builder";
+import { generate, util as u, types as t } from "scss-builder";
 import { animation } from "../animations";
 import { duration } from "../durations";
 import { easing } from "../easings";
 import { keyframes } from "../keyframes";
 import { animationStyles } from "../motion-styles";
 
-function convertValueToSassMap(value) {
-  if (typeof value !== "object") {
-    return t.SassValue(value);
-  }
+interface BuildFile {
+  filepath: string;
+  builder: any;
+}
 
+function getMap(list, useSassVar) {
+  if (typeof list !== "object") {
+    const value = useSassVar ? `$${list}` : list;
+    return u.primitive(value);
+  }
   return t.SassMap({
-    properties: Object.entries(value).map(([key, value]) => {
+    properties: Object.entries(list).map(([key, value]) => {
       return t.SassMapProperty({
         key: t.Identifier(key, true),
-        value:
-          typeof value === "object"
-            ? convertValueToSassMap(value)
-            : primitive(value),
+        value: useSassVar ? getMap(key, useSassVar) : getMap(value, useSassVar),
       });
     }),
   });
 }
 
-function generateMotionStyle() {
+function getVariables(prefix, values) {
+  return Object.entries(values).flatMap(([key, value]) => {
+    if (typeof value === "object") {
+      const name = u.joinKeys(prefix, key);
+      return getVariables(name, value);
+    }
+    return t.Assignment({
+      id: t.Identifier(u.joinKeys(prefix, key), true),
+      init: u.primitive(value),
+      default: true,
+    });
+  });
+}
+
+function buildMotionStyle() {
   const variables = Object.entries(animationStyles).map(([key, value]) => {
     return t.Assignment({
       id: t.Identifier(key, true),
-      init: convertValueToSassMap(value),
+      init: getMap(value, false),
       default: true,
     });
   });
 
-  const ast = t.StyleSheet([t.NewLine(), ...variables]);
-  const { code } = generate(ast as any);
-  return code;
+  return t.StyleSheet([t.NewLine(), ...variables]);
 }
 
-function buildTokens(group, list) {
-  const listVariables = [];
-  const Variablesinfo = [];
-
-  Object.entries(list).forEach(([key, value]) => {
-    const id = t.Identifier(key, true);
-    const assignment = t.Assignment({
-      id,
-      init: primitive(value),
-      default: true,
-    });
-    listVariables.push(t.NewLine(), assignment);
-    Variablesinfo.push([id, key]);
+function buildTokens(prefix, list) {
+  const motionVariables = getVariables(null, list);
+  const motionMap = t.Assignment({
+    id: t.Identifier(prefix),
+    init: getMap(list, true),
   });
 
-  const listMap = t.Assignment({
-    id: t.Identifier(group),
-    init: t.SassMap({
-      properties: Variablesinfo.map(([id, key]) => {
-        return t.SassMapProperty({
-          key: id,
-          value: primitive(`$${key}`),
-        });
-      }),
-    }),
-  });
-  return t.StyleSheet([...listVariables, t.NewLine(), listMap]);
+  return t.StyleSheet([
+    t.NewLine(),
+    ...motionVariables,
+    t.NewLine(),
+    motionMap,
+  ]);
 }
-function generateTokens(tokens) {
-  const { code } = generate(tokens);
-  return code;
+
+function getGeneratedPath(module: string) {
+  const SRC_DIR = process.env.SRC_DIR || path.resolve(__dirname, "../");
+  return path.join(SRC_DIR, module, "scss", "generated");
 }
-function generateAnimation() {
-  return generateTokens(buildTokens("animation", animation));
-}
-function generateDuration() {
-  return generateTokens(buildTokens("duration", duration));
-}
-function generateEasing() {
-  return generateTokens(buildTokens("easing", easing));
-}
-function genKeyframeTokens() {
+function buildKeyframe() {
   const keyframeMap = t.Assignment({
     id: t.Identifier("keyframe"),
-    init: t.SassMap({
-      properties: Object.entries(keyframes).map(([name, stages]) => {
-        return t.SassMapProperty({
-          key: t.Identifier(name, true),
-          value: t.SassMap({
-            properties: Object.entries(stages).map(([stage, properties]) =>
-              t.SassMapProperty({
-                key: t.Identifier(stage),
-                value: t.SassMap({
-                  properties: Object.entries(properties).map(([prop, value]) =>
-                    t.SassMapProperty({
-                      key: t.Identifier(prop, true),
-                      value: t.SassValue(value),
-                    })
-                  ),
-                }),
-              })
-            ),
-          }),
-        });
-      }),
-    }),
+    init: getMap(keyframes, false),
     default: true,
   });
 
   return t.StyleSheet([t.NewLine(), keyframeMap]);
 }
-function generateKeyframe() {
-  return generateTokens(genKeyframeTokens());
-}
-
 async function build() {
-  const generatedDir = path.resolve(__dirname, "../../scss/generated");
-  mkdirSync(generatedDir, { recursive: true });
+  const generatedDir = getGeneratedPath("motion");
 
-  const filePath1 = path.join(generatedDir, "_motion-style.scss");
-  const filePath2 = path.join(generatedDir, "_animation.scss");
-  const filePath3 = path.join(generatedDir, "_duration.scss");
-  const filePath4 = path.join(generatedDir, "_easing.scss");
-  const filePath5 = path.join(generatedDir, "_keyframe.scss");
+  const files: BuildFile[] = [
+    {
+      filepath: path.join(generatedDir, "_motion-style.scss"),
+      builder: buildMotionStyle(),
+    },
+    {
+      filepath: path.join(generatedDir, "_animation.scss"),
+      builder: buildTokens("animation", animation),
+    },
+    {
+      filepath: path.join(generatedDir, "_duration.scss"),
+      builder: buildTokens("duration", duration),
+    },
+    {
+      filepath: path.join(generatedDir, "_easing.scss"),
+      builder: buildTokens("easing", easing),
+    },
+    {
+      filepath: path.join(generatedDir, "_keyframe.scss"),
+      builder: buildKeyframe(),
+    },
+  ];
+  mkdirSync(generatedDir, { recursive: true });
   try {
-    await writeFile(filePath1, generateMotionStyle());
-    await writeFile(filePath2, generateAnimation());
-    await writeFile(filePath3, generateDuration());
-    await writeFile(filePath4, generateEasing());
-    await writeFile(filePath5, generateKeyframe());
+    for (const { filepath, builder } of files) {
+      const { code } = generate(builder as any);
+      await writeFile(filepath, code);
+    }
+
     console.log("Motion SCSS has been generated successfully");
   } catch (error) {
     console.error("error writing Motion SCSS files:", error);

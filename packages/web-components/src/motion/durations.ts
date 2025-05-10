@@ -1,9 +1,9 @@
 export const duration = {
-  fastest: "50ms",
-  faster: "100ms",
-  fast: "150ms",
-  moderate: "200ms",
-  slow: "300ms",
-  slower: "400ms",
-  slowest: "500ms",
+  durationFastest: "50ms",
+  durationFaster: "100ms",
+  durationFast: "150ms",
+  durationModerate: "200ms",
+  durationSlow: "300ms",
+  durationSlower: "400ms",
+  durationSlowest: "500ms",
 };
