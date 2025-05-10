@@ -4,11 +4,11 @@ import { fontWeights } from "./font-weights";
 
 export const textStyles = {
   "2xs": { fontSize: fontSizes["2xs"], lineHeight: rem(12) },
-  xs: { fontSize: fontSizes.xs, lineHeight: rem(16) },
-  sm: { fontSize: fontSizes.sm, lineHeight: rem(20) },
-  md: { fontSize: fontSizes.md, lineHeight: rem(24) },
-  lg: { fontSize: fontSizes.lg, lineHeight: rem(28) },
-  xl: { fontSize: fontSizes.xl, lineHeight: rem(30) },
+  Xs: { fontSize: fontSizes.xs, lineHeight: rem(16) },
+  Sm: { fontSize: fontSizes.sm, lineHeight: rem(20) },
+  Md: { fontSize: fontSizes.md, lineHeight: rem(24) },
+  Lg: { fontSize: fontSizes.lg, lineHeight: rem(28) },
+  Xl: { fontSize: fontSizes.xl, lineHeight: rem(30) },
   "2xl": { fontSize: fontSizes["2xl"], lineHeight: rem(32) },
   "3xl": { fontSize: fontSizes["3xl"], lineHeight: rem(38) },
   "4xl": {
