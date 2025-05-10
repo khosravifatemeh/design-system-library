@@ -1,2 +1,2 @@
-export { types } from "scss-builder/ast/node-builder";
-export { definitions } from "scss-builder/ast/node-definition";
+export { types } from "./node-builder";
+export { definitions } from "./node-definition";

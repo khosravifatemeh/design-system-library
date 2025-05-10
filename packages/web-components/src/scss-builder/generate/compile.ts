@@ -1,5 +1,5 @@
-import { formateCode, print } from "scss-builder/generate/printer";
-import { GenerateResult } from "scss-builder/types";
+import { formateCode, print } from "./printer";
+import { GenerateResult } from "../types";
 
 export function generate(node: Node): GenerateResult {
   const rawCode = print(node);

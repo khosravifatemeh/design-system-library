@@ -1,5 +1,5 @@
 import prettier from "@prettier/sync";
-import { definitions } from "scss-builder/ast";
+import { definitions } from "../ast";
 
 export const space = (): string => " ";
 export const newLine = (indent: number): string =>

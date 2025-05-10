@@ -1,5 +1,5 @@
-import * as u from "scss-builder/utils";
-import { types as t } from "scss-builder/ast";
+import * as u from "./";
+import { types as t } from "../ast";
 export function primitive(value: any) {
   if (typeof value === "string") {
     if (value.startsWith("#")) {

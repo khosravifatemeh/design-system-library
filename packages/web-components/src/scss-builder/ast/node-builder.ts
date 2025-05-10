@@ -1,4 +1,4 @@
-import { definitions } from "scss-builder/ast";
+import { definitions } from "./node-definition";
 import {
   DefinitionMap,
   Node,
@@ -7,7 +7,7 @@ import {
   NodeFactory,
   NodeField,
   Types,
-} from "scss-builder/types";
+} from "../types";
 
 function isArgsObject(args) {
   return (
@@ -49,7 +49,7 @@ function defineNode<T extends Node>(
   type: string,
   options: NodeDefinition<T>
 ): NodeBuilder<T> {
-  const { fields, generate } = options;
+  const { fields = {} as NodeField<T>, generate } = options;
   if (typeof generate !== "function") {
     throw new Error(`Expected a \`generate\` method for type \`${type}\``);
   }

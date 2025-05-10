@@ -308,14 +308,14 @@ const SassMap = defineNode<SassMap>("SassMap", {
   generate: (node: SassMap, _) => {
     try {
       if (!node.properties.length) {
-        return t.openBrace + t.closeBrace;
+        return t.openParen + t.closeParen;
       }
       const properties = node.properties.map((prop, index) => {
         const isLast =
           index < node.properties.length - 1 ? t.separator : t.empty;
         return p.compose(p.newLine(2), p.print(prop), isLast);
       });
-      return p.compose(t.openBrace, ...properties, p.newLine(0), t.closeBrace);
+      return p.compose(t.openParen, ...properties, p.newLine(0), t.closeParen);
     } catch (error) {
       throw new Error(`Unexpected error in ${node.type} - ${error.message}`);
     }
