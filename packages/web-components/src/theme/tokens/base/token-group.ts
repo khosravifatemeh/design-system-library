@@ -21,7 +21,7 @@ export class TokenGroup {
   constructor(name: string, tokens: TokenGroupItem["tokens"]) {
     this.name = name;
     this.children = tokens.map((child: any) => {
-      if (child.kind === "TokenGroup") {
+      if (child instanceof TokenGroup) {
         return child;
       }
       return Token.create(child);
