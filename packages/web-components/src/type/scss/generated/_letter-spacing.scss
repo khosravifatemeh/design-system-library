@@ -1,0 +1,13 @@
+$-tighter: -0.05em !default;
+$-tight: -0.025em !default;
+$-wide: 0.025em !default;
+$-wider: 0.05em !default;
+$-widest: 0.1em !default;
+
+$letter-spacing: (
+  tighter: $tighter,
+  tight: $tight,
+  wide: $wide,
+  wider: $wider,
+  widest: $widest,
+) !default;

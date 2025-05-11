@@ -1,0 +1,71 @@
+$text-style-2xs: (
+  font-size: 0.625rem,
+  line-height: 0.75rem,
+) !default;
+
+$text-style-xs: (
+  font-size: 0.75rem,
+  line-height: 1rem,
+) !default;
+
+$text-style-sm: (
+  font-size: 0.875rem,
+  line-height: 1.25rem,
+) !default;
+
+$text-style-md: (
+  font-size: 1rem,
+  line-height: 1.5rem,
+) !default;
+
+$text-style-lg: (
+  font-size: 1.125rem,
+  line-height: 1.75rem,
+) !default;
+
+$text-style-xl: (
+  font-size: 1.25rem,
+  line-height: 1.875rem,
+) !default;
+
+$text-style-2xl: (
+  font-size: 1.5rem,
+  line-height: 2rem,
+) !default;
+
+$text-style-3xl: (
+  font-size: 1.875rem,
+  line-height: 2.375rem,
+) !default;
+
+$text-style-4xl: (
+  font-size: 2.25rem,
+  line-height: 2.75rem,
+  letter-spacing: -0.025em,
+) !default;
+
+$text-style-5xl: (
+  font-size: 3rem,
+  line-height: 3.75rem,
+  letter-spacing: -0.025em,
+) !default;
+
+$text-style-6xl: (
+  font-size: 3.75rem,
+  line-height: 4.5rem,
+  letter-spacing: -0.025em,
+) !default;
+
+$text-style-7xl: (
+  font-size: 4.5rem,
+  line-height: 5.75rem,
+  letter-spacing: -0.025em,
+) !default;
+
+$text-style-none: () !default;
+
+$text-style-label: (
+  font-size: 0.875rem,
+  line-height: 1.25rem,
+  font-weight: 500,
+) !default;

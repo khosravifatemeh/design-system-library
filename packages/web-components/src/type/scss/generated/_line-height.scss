@@ -1,0 +1,13 @@
+$-shorter: 1.25 !default;
+$-short: 1.375 !default;
+$-moderate: 1.5 !default;
+$-tall: 1.625 !default;
+$-taller: 2 !default;
+
+$line-height: (
+  shorter: $shorter,
+  short: $short,
+  moderate: $moderate,
+  tall: $tall,
+  taller: $taller,
+) !default;
