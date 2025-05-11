@@ -1,0 +1,13 @@
+$breakpoint-sm: 30rem !default;
+$breakpoint-md: 48rem !default;
+$breakpoint-lg: 64rem !default;
+$breakpoint-xl: 80rem !default;
+$breakpoint-2xl: 96rem !default;
+
+$breakpoint: (
+  breakpoint-sm: $breakpoint-sm,
+  breakpoint-md: $breakpoint-md,
+  breakpoint-lg: $breakpoint-lg,
+  breakpoint-xl: $breakpoint-xl,
+  breakpoint-2xl: $breakpoint-2xl,
+) !default;
