@@ -1,6 +1,7 @@
 import { types as t, util as u } from "scss-builder";
 
 import { themes } from "../..";
+import { allColorGroup } from "../../tokens";
 
 export function buildThemes() {
   const imports = [
@@ -18,12 +19,16 @@ export function buildThemes() {
       t.Assignment({
         id: t.Identifier(key, true),
         init: t.SassMap({
-          properties: Object.entries(theme).map(([token, value]) =>
-            t.SassMapProperty({
-              key: t.Identifier(token, true),
-              value: u.primitive(value),
+          properties: Object.entries(theme)
+            .filter(([token]) => {
+              return allColorGroup.getToken(u.convertName(token));
             })
-          ),
+            .map(([token, value]) =>
+              t.SassMapProperty({
+                key: t.Identifier(token, true),
+                value: u.primitive(value),
+              })
+            ),
         }),
         default: true,
       }),
