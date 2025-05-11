@@ -1,0 +1,26 @@
+$blur-none: 0 !default;
+
+$blur-sm: 4px !default;
+
+$blur-md: 8px !default;
+
+$blur-lg: 12px !default;
+
+$blur-xl: 16px !default;
+
+$blur-2XL: 24px !default;
+
+$blur-3XL: 40px !default;
+
+$blur-4XL: 64px !default;
+
+$blur-level: (
+  blur-none: $blur-none,
+  blur-sm: $blur-sm,
+  blur-md: $blur-md,
+  blur-lg: $blur-lg,
+  blur-xl: $blur-xl,
+  blur-2XL: $blur-2XL,
+  blur-3XL: $blur-3XL,
+  blur-4XL: $blur-4XL,
+) !default;

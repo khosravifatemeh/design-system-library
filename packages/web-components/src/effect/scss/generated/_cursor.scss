@@ -1,0 +1,26 @@
+$cursor-button: unquote('pointer') !default;
+
+$cursor-checkbox: unquote('default') !default;
+
+$cursor-disabled: unquote('not-allowed') !default;
+
+$cursor-menuitem: unquote('default') !default;
+
+$cursor-option: unquote('default') !default;
+
+$cursor-radio: unquote('default') !default;
+
+$cursor-slider: unquote('default') !default;
+
+$cursor-switch: unquote('pointer') !default;
+
+$cursor: (
+  cursor-button: $cursor-button,
+  cursor-checkbox: $cursor-checkbox,
+  cursor-disabled: $cursor-disabled,
+  cursor-menuitem: $cursor-menuitem,
+  cursor-option: $cursor-option,
+  cursor-radio: $cursor-radio,
+  cursor-slider: $cursor-slider,
+  cursor-switch: $cursor-switch,
+) !default;

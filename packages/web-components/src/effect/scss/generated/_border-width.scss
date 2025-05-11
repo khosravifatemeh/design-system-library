@@ -1,0 +1,17 @@
+$border-xs: unquote('0.5px solid') !default;
+
+$border-sm: unquote('1px solid') !default;
+
+$border-md: unquote('2px solid') !default;
+
+$border-lg: unquote('4px solid') !default;
+
+$border-xl: unquote('8px solid') !default;
+
+$border-width: (
+  border-xs: $border-xs,
+  border-sm: $border-sm,
+  border-md: $border-md,
+  border-lg: $border-lg,
+  border-xl: $border-xl,
+) !default;

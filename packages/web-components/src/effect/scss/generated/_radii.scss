@@ -1,0 +1,35 @@
+$radius-none: 0 !default;
+
+$radius-2XS: 0.0625rem !default;
+
+$radius-xs: 0.125rem !default;
+
+$radius-sm: 0.25rem !default;
+
+$radius-md: 0.375rem !default;
+
+$radius-lg: 0.5rem !default;
+
+$radius-xl: 0.75rem !default;
+
+$radius-2XL: 1rem !default;
+
+$radius-3XL: 1.5rem !default;
+
+$radius-4XL: 2rem !default;
+
+$radius-full: 9999px !default;
+
+$radii: (
+  radius-none: $radius-none,
+  radius-2XS: $radius-2XS,
+  radius-xs: $radius-xs,
+  radius-sm: $radius-sm,
+  radius-md: $radius-md,
+  radius-lg: $radius-lg,
+  radius-xl: $radius-xl,
+  radius-2XL: $radius-2XL,
+  radius-3XL: $radius-3XL,
+  radius-4XL: $radius-4XL,
+  radius-full: $radius-full,
+) !default;
