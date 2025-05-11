@@ -1,0 +1,257 @@
+$keyframe: (
+  spin: (
+    0%: (
+      transform: unquote('rotate(0deg)'),
+    ),
+    100%: (
+      transform: unquote('rotate(360deg)'),
+    ),
+  ),
+  pulse: (
+    50%: (
+      opacity: unquote('0.5'),
+    ),
+  ),
+  ping: (
+    75%,
+    -100%: (
+        transform: unquote('scale(2)'),
+        opacity: 0,
+      ),
+  ),
+  bounce: (
+    0%,
+    -100%: (
+        transform: unquote('translateY(-25%)'),
+        animation-timing-function: unquote('cubic-bezier(0.8,0,1,1)'),
+      ),
+    50%: (
+      transform: unquote('none'),
+      animation-timing-function: unquote('cubic-bezier(0,0,0.2,1)'),
+    ),
+  ),
+  bg-position: (
+    from: (
+      background-position: unquote('var(--animate-from, 1rem) 0'),
+    ),
+    to: (
+      background-position: unquote('var(--animate-to, 0) 0'),
+    ),
+  ),
+  position: (
+    from: (
+      inset-inline-start: unquote('var(--animate-from-x)'),
+      inset-block-start: unquote('var(--animate-from-y)'),
+    ),
+    to: (
+      inset-inline-start: unquote('var(--animate-to-x)'),
+      inset-block-start: unquote('var(--animate-to-y)'),
+    ),
+  ),
+  circular-progress: (
+    0%: (
+      stroke-dasharray: unquote('1, 400'),
+      stroke-dashoffset: 0,
+    ),
+    50%: (
+      stroke-dasharray: unquote('400, 400'),
+      stroke-dashoffset: -100%,
+    ),
+    100%: (
+      stroke-dasharray: unquote('400, 400'),
+      stroke-dashoffset: -260%,
+    ),
+  ),
+  expand-height: (
+    from: (
+      height: 0,
+    ),
+    to: (
+      height: unquote('var(--height)'),
+    ),
+  ),
+  collapse-height: (
+    from: (
+      height: unquote('var(--height)'),
+    ),
+    to: (
+      height: 0,
+    ),
+  ),
+  expand-width: (
+    from: (
+      width: 0,
+    ),
+    to: (
+      width: unquote('var(--width)'),
+    ),
+  ),
+  collapse-width: (
+    from: (
+      height: unquote('var(--width)'),
+    ),
+    to: (
+      height: 0,
+    ),
+  ),
+  fade-in: (
+    from: (
+      opacity: 0,
+    ),
+    to: (
+      opacity: 1,
+    ),
+  ),
+  fade-out: (
+    from: (
+      opacity: 1,
+    ),
+    to: (
+      opacity: 0,
+    ),
+  ),
+  slide-from-left-full: (
+    from: (
+      translate: unquote('-100% 0'),
+    ),
+    to: (
+      translate: unquote('0 0'),
+    ),
+  ),
+  slide-from-right-full: (
+    from: (
+      translate: unquote('100% 0'),
+    ),
+    to: (
+      translate: unquote('0 0'),
+    ),
+  ),
+  slide-from-top-full: (
+    from: (
+      translate: 0 -100%,
+    ),
+    to: (
+      translate: unquote('0 0'),
+    ),
+  ),
+  slide-from-bottom-full: (
+    from: (
+      translate: 0 100%,
+    ),
+    to: (
+      translate: unquote('0 0'),
+    ),
+  ),
+  slide-to-left-full: (
+    from: (
+      translate: unquote('0 0'),
+    ),
+    to: (
+      translate: unquote('-100% 0'),
+    ),
+  ),
+  slide-to-right-full: (
+    from: (
+      translate: unquote('0 0'),
+    ),
+    to: (
+      translate: unquote('100% 0'),
+    ),
+  ),
+  slide-to-top-full: (
+    from: (
+      translate: unquote('0 0'),
+    ),
+    to: (
+      translate: 0 -100%,
+    ),
+  ),
+  slide-to-bottom-full: (
+    from: (
+      translate: unquote('0 0'),
+    ),
+    to: (
+      translate: 0 100%,
+    ),
+  ),
+  slide-from-top: (
+    0%: (
+      translate: 0 -0.5rem,
+    ),
+    to: (
+      translate: 0,
+    ),
+  ),
+  slide-from-bottom: (
+    0%: (
+      translate: 0 0.5rem,
+    ),
+    to: (
+      translate: 0,
+    ),
+  ),
+  slide-from-left: (
+    0%: (
+      translate: unquote('-0.5rem 0'),
+    ),
+    to: (
+      translate: 0,
+    ),
+  ),
+  slide-from-right: (
+    0%: (
+      translate: unquote('0.5rem 0'),
+    ),
+    to: (
+      translate: 0,
+    ),
+  ),
+  slide-to-top: (
+    0%: (
+      translate: 0,
+    ),
+    to: (
+      translate: 0 -0.5rem,
+    ),
+  ),
+  slide-to-bottom: (
+    0%: (
+      translate: 0,
+    ),
+    to: (
+      translate: 0 0.5rem,
+    ),
+  ),
+  slide-to-left: (
+    0%: (
+      translate: 0,
+    ),
+    to: (
+      translate: unquote('-0.5rem 0'),
+    ),
+  ),
+  slide-to-right: (
+    0%: (
+      translate: 0,
+    ),
+    to: (
+      translate: unquote('0.5rem 0'),
+    ),
+  ),
+  scale-in: (
+    from: (
+      scale: unquote('0.95'),
+    ),
+    to: (
+      scale: unquote('1'),
+    ),
+  ),
+  scale-out: (
+    from: (
+      scale: unquote('1'),
+    ),
+    to: (
+      scale: unquote('0.95'),
+    ),
+  ),
+) !default;

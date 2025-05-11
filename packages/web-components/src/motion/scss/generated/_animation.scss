@@ -1,0 +1,15 @@
+$animation-spin: unquote('spin 1s linear infinite') !default;
+$animation-ping: unquote(
+  'ping 1s cubic-bezier(0, 0, 0.2, 1) infinite'
+) !default;
+$animation-pulse: unquote(
+  'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+) !default;
+$animation-bounce: unquote('bounce 1s infinite') !default;
+
+$animation: (
+  animation-spin: $animation-spin,
+  animation-ping: $animation-ping,
+  animation-pulse: $animation-pulse,
+  animation-bounce: $animation-bounce,
+) !default;

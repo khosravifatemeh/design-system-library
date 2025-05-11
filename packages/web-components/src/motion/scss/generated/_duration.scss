@@ -1,0 +1,17 @@
+$duration-fastest: unquote('50ms') !default;
+$duration-faster: unquote('100ms') !default;
+$duration-fast: unquote('150ms') !default;
+$duration-moderate: unquote('200ms') !default;
+$duration-slow: unquote('300ms') !default;
+$duration-slower: unquote('400ms') !default;
+$duration-slowest: unquote('500ms') !default;
+
+$duration: (
+  duration-fastest: $duration-fastest,
+  duration-faster: $duration-faster,
+  duration-fast: $duration-fast,
+  duration-moderate: $duration-moderate,
+  duration-slow: $duration-slow,
+  duration-slower: $duration-slower,
+  duration-slowest: $duration-slowest,
+) !default;

@@ -1,0 +1,11 @@
+$ease-in: unquote('cubic-bezier(0.42, 0, 1, 1)') !default;
+$ease-out: unquote('cubic-bezier(0, 0, 0.58, 1)') !default;
+$ease-in-out: unquote('cubic-bezier(0.42, 0, 0.58, 1)') !default;
+$ease-in-smooth: unquote('cubic-bezier(0.32, 0.72, 0, 1)') !default;
+
+$easing: (
+  ease-in: $ease-in,
+  ease-out: $ease-out,
+  ease-in-out: $ease-in-out,
+  ease-in-smooth: $ease-in-smooth,
+) !default;

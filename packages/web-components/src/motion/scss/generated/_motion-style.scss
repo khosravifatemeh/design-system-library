@@ -1,0 +1,42 @@
+$slide-fade-in: (
+  transform-origin: unquote('var(--transform-origin)'),
+  placement: (
+    top: (
+      animation-name: unquote('slideFromBottom, fadeIn'),
+    ),
+    bottom: (
+      animation-name: unquote('slideFromTop, fadeIn'),
+    ),
+    left: (
+      animation-name: unquote('slideFromLeft, fadeIn'),
+    ),
+    right: (
+      animation-name: unquote('slideFromRight, fadeIn'),
+    ),
+  ),
+) !default;
+$slide-fade-out: (
+  transform-origin: unquote('var(--transform-origin)'),
+  placement: (
+    top: (
+      animation-name: unquote('slideToBottom, fadeOut'),
+    ),
+    bottom: (
+      animation-name: unquote('slideToTop, fadeOut'),
+    ),
+    left: (
+      animation-name: unquote('slideToRight, fadeOut'),
+    ),
+    right: (
+      animation-name: unquote('slideToLeft, fadeOut'),
+    ),
+  ),
+) !default;
+$scale-fade-in: (
+  transform-origin: unquote('var(--transform-origin)'),
+  animation-name: unquote('scaleIn, fadeIn'),
+) !default;
+$scale-fade-out: (
+  transform-origin: unquote('var(--transform-origin)'),
+  animation-name: unquote('scaleOut, fadeOut'),
+) !default;
