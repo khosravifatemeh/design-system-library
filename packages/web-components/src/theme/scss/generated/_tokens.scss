@@ -1,0 +1,48 @@
+@use '@use "../config"';
+@use '@use "../theme"';
+
+@function _get($token) {
+  @if config.$use-fallback-value == false {
+    @return var(--#{config.$prefix}-#{$token});
+  } @else {
+    @return var(--#{config.$prefix}-#{$token}, #{theme.get($token)});
+  }
+}
+
+$background: _get('background') !default;
+$background-subtle: _get('background-subtle') !default;
+$background-muted: _get('background-muted') !default;
+$background-emphasized: _get('background-emphasized') !default;
+$background-inverted: _get('background-inverted') !default;
+$background-panel: _get('background-panel') !default;
+$background-error: _get('background-error') !default;
+$background-warning: _get('background-warning') !default;
+$background-success: _get('background-success') !default;
+$background-info: _get('background-info') !default;
+$foreground: _get('foreground') !default;
+$foreground-muted: _get('foreground-muted') !default;
+$foreground-subtle: _get('foreground-subtle') !default;
+$foreground-inverted: _get('foreground-inverted') !default;
+$foreground-error: _get('foreground-error') !default;
+$foreground-warning: _get('foreground-warning') !default;
+$foreground-success: _get('foreground-success') !default;
+$foreground-info: _get('foreground-info') !default;
+$border: _get('border') !default;
+$border-muted: _get('border-muted') !default;
+$border-subtle: _get('border-subtle') !default;
+$border-emphasized: _get('border-emphasized') !default;
+$border-inverted: _get('border-inverted') !default;
+$border-error: _get('border-error') !default;
+$border-warning: _get('border-warning') !default;
+$border-success: _get('border-success') !default;
+$border-info: _get('border-info') !default;
+$gray: _get('gray') !default;
+$red: _get('red') !default;
+$blue: _get('blue') !default;
+$green: _get('green') !default;
+$orange: _get('orange') !default;
+$yellow: _get('yellow') !default;
+$teal: _get('teal') !default;
+$purple: _get('purple') !default;
+$pink: _get('pink') !default;
+$cyan: _get('cyan') !default;
