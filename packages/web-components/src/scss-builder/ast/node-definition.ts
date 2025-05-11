@@ -222,6 +222,7 @@ const Identifier = defineNode<Identifier>("Identifier", {
   generate: (node: Identifier, parent: Node) => {
     try {
       const name = node.kebabCase ? convertName(node.name) : node.name;
+
       return p.compose(parent ? t.variablePrefix : t.empty, name);
     } catch (error) {
       throw new Error(`Unexpected error in ${node.type} - ${error.message}`);
@@ -244,12 +245,14 @@ const SassFunctionCall = defineNode<SassFunctionCall>("SassFunctionCall", {
       ),
     },
   },
-  generate: (node: SassFunction, _) => {
+  generate: (node: SassFunctionCall, _) => {
     try {
       const properties = node.params.map((prop, index) => {
+        console.log(prop);
+
         const needVariablePrefix =
           prop.type === Identifier.type ? t.variablePrefix : t.empty;
-        const comma = index < node.params.length ? t.semicolon : t.empty;
+        const comma = index < node.params.length ? t.separator : t.empty;
 
         return p.compose(
           needVariablePrefix,
@@ -397,7 +400,7 @@ const SassFunction = defineNode<SassFunction>("SassFunction", {
         t.function,
         t.space,
         p.print(node.id, parent),
-        t.openBrace
+        t.openParen
       );
 
       const middleSection = node.params
@@ -413,7 +416,7 @@ const SassFunction = defineNode<SassFunction>("SassFunction", {
       return p.compose(
         firstSection,
         middleSection,
-        t.closeBrace,
+        t.closeParen,
         t.space,
         p.print(node.body, parent)
       );
