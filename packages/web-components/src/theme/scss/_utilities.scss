@@ -1,4 +1,8 @@
 @use "sass:map";
+@use "../../effect";
+@use "../../layout";
+@use "../../motion";
+@use "../../type";
 
 /// @access private
 /// @group @carbon/themes
@@ -9,7 +13,25 @@
   }
   @return $result;
 }
-$params: merge($sizes, $layout);
+$params: merge(
+  $spacing,
+  $z-index,
+  $breakpoint,
+  $size,
+  $border-width,
+  $animation,
+  $duration,
+  $easing,
+  $aspect-ratio,
+  $blur-level,
+  $cursor,
+  $radii,
+  $font-family,
+  $font-size,
+  $font-weight,
+  $letter-spacing,
+  $line-height
+);
 
 @function params($key) {
   @if map-has-key($params, $key) ==true {
