@@ -14,16 +14,19 @@ interface BuildFile {
   builder: any;
 }
 
-function getMap(list, useSassVar) {
+function getMap(list, useSassVar, prefix = null) {
   if (typeof list !== "object") {
     const value = useSassVar ? `$${list}` : list;
     return u.primitive(value);
   }
   return t.SassMap({
     properties: Object.entries(list).map(([key, value]) => {
+      const name = prefix ? u.joinKeys(prefix, key) : key;
       return t.SassMapProperty({
-        key: t.Identifier(key, true),
-        value: useSassVar ? getMap(key, useSassVar) : getMap(value, useSassVar),
+        key: t.Identifier(name, true),
+        value: useSassVar
+          ? getMap(name, useSassVar)
+          : getMap(value, useSassVar),
       });
     }),
   });
@@ -44,10 +47,10 @@ function getVariables(prefix, values) {
 }
 
 function buildTokens(prefix, list) {
-  const layoutVariables = getVariables(null, list);
+  const layoutVariables = getVariables(prefix, list);
   const layoutMap = t.Assignment({
     id: t.Identifier(prefix),
-    init: getMap(list, true),
+    init: getMap(list, true, prefix),
   });
 
   return t.StyleSheet([

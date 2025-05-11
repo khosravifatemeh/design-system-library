@@ -1,20 +1,20 @@
-$-heading: unquote(
+$font-family-heading: unquote(
   'Inter, -apple-system, BlinkMacSystemFont, ' Segoe UI
     ', Helvetica, Arial, sans-serif, ' Apple Color Emoji ', ' Segoe UI Emoji
     ', ' Segoe UI Symbol ''
 ) !default;
-$-body: unquote(
+$font-family-body: unquote(
   'Inter, -apple-system, BlinkMacSystemFont, ' Segoe UI
     ', Helvetica, Arial, sans-serif, ' Apple Color Emoji ', ' Segoe UI Emoji
     ', ' Segoe UI Symbol ''
 ) !default;
-$-mono: unquote(
+$font-family-mono: unquote(
   'SFMono-Regular,Menlo,Monaco,Consolas,' Liberation Mono ',' Courier New
     ',monospace'
 ) !default;
 
 $font-family: (
-  heading: $heading,
-  body: $body,
-  mono: $mono,
+  font-family-heading: $font-family-heading,
+  font-family-body: $font-family-body,
+  font-family-mono: $font-family-mono,
 ) !default;

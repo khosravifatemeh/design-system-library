@@ -1,13 +1,13 @@
-$-tighter: -0.05em !default;
-$-tight: -0.025em !default;
-$-wide: 0.025em !default;
-$-wider: 0.05em !default;
-$-widest: 0.1em !default;
+$letter-spacing-tighter: -0.05em !default;
+$letter-spacing-tight: -0.025em !default;
+$letter-spacing-wide: 0.025em !default;
+$letter-spacing-wider: 0.05em !default;
+$letter-spacing-widest: 0.1em !default;
 
 $letter-spacing: (
-  tighter: $tighter,
-  tight: $tight,
-  wide: $wide,
-  wider: $wider,
-  widest: $widest,
+  letter-spacing-tighter: $letter-spacing-tighter,
+  letter-spacing-tight: $letter-spacing-tight,
+  letter-spacing-wide: $letter-spacing-wide,
+  letter-spacing-wider: $letter-spacing-wider,
+  letter-spacing-widest: $letter-spacing-widest,
 ) !default;
